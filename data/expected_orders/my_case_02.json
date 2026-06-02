@@ -1,0 +1,44 @@
+{
+  "order_id": "ORD-8D93F55D91",
+  "created_at": "2026-06-01",
+  "status": "confirmed",
+  "customer": {
+    "name": "Lê Thị Hoa",
+    "phone": "0912345678",
+    "email": "hoa@example.com",
+    "shipping_address": "456 Hai Bà Trưng, Hà Nội"
+  },
+  "items": [
+    {
+      "product_id": "HD-001",
+      "sku": "SNY-WH1000XM5",
+      "name": "Sony WH-1000XM5",
+      "category": "headphone",
+      "quantity": 1,
+      "unit_price": 7990000,
+      "line_total": 7990000
+    },
+    {
+      "product_id": "LT-002",
+      "sku": "APL-MBA-M3-13",
+      "name": "MacBook Air M3 13",
+      "category": "laptop",
+      "quantity": 1,
+      "unit_price": 28900000,
+      "line_total": 28900000
+    }
+  ],
+  "pricing": {
+    "currency": "VND",
+    "subtotal": 36890000,
+    "discount_rate": 0.1,
+    "discount_amount": 3689000,
+    "final_total": 33201000
+  },
+  "discount": {
+    "campaign_code": "FLASH-10",
+    "customer_tier": "standard"
+  },
+  "save_path": "artifacts/orders/ORD-8D93F55D91.json",
+  "source": "llm-order-agent"
+}

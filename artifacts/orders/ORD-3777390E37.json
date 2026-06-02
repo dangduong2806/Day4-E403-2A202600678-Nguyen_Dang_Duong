@@ -1,0 +1,45 @@
+{
+  "order_id": "ORD-3777390E37",
+  "created_at": "2026-06-01",
+  "status": "confirmed",
+  "customer": {
+    "name": "Trần Bảo",
+    "phone": "0987654321",
+    "email": "bao@example.com",
+    "shipping_address": "123 Lê Lợi, Q1, TP.HCM"
+  },
+  "items": [
+    {
+      "product_id": "LT-003",
+      "sku": "DEL-INS14-7440",
+      "name": "Dell Inspiron 14",
+      "category": "laptop",
+      "quantity": 1,
+      "unit_price": 14500000,
+      "line_total": 14500000
+    },
+    {
+      "product_id": "MS-001",
+      "sku": "LOG-PEBBLE2-M350S",
+      "name": "Logitech Pebble 2 M350s",
+      "category": "mouse",
+      "quantity": 1,
+      "unit_price": 690000,
+      "line_total": 690000
+    }
+  ],
+  "pricing": {
+    "currency": "VND",
+    "subtotal": 15190000,
+    "discount_rate": 0.2,
+    "discount_amount": 3038000,
+    "final_total": 12152000
+  },
+  "discount": {
+    "campaign_code": "FLASH-20",
+    "customer_tier": "standard"
+  },
+  "notes": "",
+  "save_path": "artifacts/orders/ORD-3777390E37.json",
+  "source": "llm-order-agent"
+}

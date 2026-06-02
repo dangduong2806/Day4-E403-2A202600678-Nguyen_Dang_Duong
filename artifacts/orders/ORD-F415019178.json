@@ -1,0 +1,45 @@
+{
+  "order_id": "ORD-F415019178",
+  "created_at": "2026-06-01",
+  "status": "confirmed",
+  "customer": {
+    "name": "Nguyễn Văn A",
+    "phone": "0909090909",
+    "email": "a.nguyen@example.com",
+    "shipping_address": "789 Nguyễn Văn Linh, Đà Nẵng"
+  },
+  "items": [
+    {
+      "product_id": "KB-001",
+      "sku": "KEY-K2MAX",
+      "name": "Keychron K2 Max",
+      "category": "keyboard",
+      "quantity": 3,
+      "unit_price": 2490000,
+      "line_total": 7470000
+    },
+    {
+      "product_id": "MS-002",
+      "sku": "LOG-G304-LS",
+      "name": "Logitech G304 Lightspeed",
+      "category": "mouse",
+      "quantity": 2,
+      "unit_price": 890000,
+      "line_total": 1780000
+    }
+  ],
+  "pricing": {
+    "currency": "VND",
+    "subtotal": 9250000,
+    "discount_rate": 0.1,
+    "discount_amount": 925000,
+    "final_total": 8325000
+  },
+  "discount": {
+    "campaign_code": "FLASH-10",
+    "customer_tier": "standard"
+  },
+  "notes": "",
+  "save_path": "artifacts/orders/ORD-F415019178.json",
+  "source": "llm-order-agent"
+}

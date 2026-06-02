@@ -35,6 +35,7 @@ Keep the answer short.
 
 def build_tools(store: OrderDataStore):
     @tool
+    # Tìm sản phẩm
     def list_products(search_text: str = "", extra: str = "", limit: int = 8) -> str:
         """Find products."""
         category = ""
@@ -58,12 +59,14 @@ def build_tools(store: OrderDataStore):
         return json.dumps(payload, ensure_ascii=False)
 
     @tool
+    # Lấy thông tin sản phẩm
     def get_product_details(product_ids_text: str = "") -> str:
         """Get product info."""
         product_ids = _coerce_product_ids(product_ids_text)
         return json.dumps(store.get_product_details(product_ids), ensure_ascii=False)
 
     @tool
+    # Tính mã giảm giá theo khách hàng
     def get_discount(customer: str = "") -> str:
         """Get discount."""
         customer_text = customer.strip()
@@ -78,6 +81,7 @@ def build_tools(store: OrderDataStore):
         return json.dumps(store.get_discount(seed_hint=seed_hint or "guest", customer_tier=customer_tier), ensure_ascii=False)
 
     @tool
+    # Tính tổng đơn hàng
     def calculate_order_totals(items_text: str = "", discount_rate: float = 0.0, detail_token: str = "") -> str:
         """Calculate totals."""
         items = _coerce_items(items_text)
@@ -143,6 +147,7 @@ def run_agent(
     messages = response["messages"] if isinstance(response, dict) else response
     tool_calls = extract_tool_calls(messages)
     saved_order, saved_order_path = extract_saved_order(tool_calls)
+    # Câu hỏi, final answer, tool calls, model, đơn đã lưu, đường dẫn file đơn
     return AgentResult(
         query=query,
         final_answer=extract_final_answer(messages),
@@ -153,7 +158,7 @@ def run_agent(
         saved_order_path=saved_order_path,
     )
 
-
+# Duyệt ngược danh sách message tìm message cuối cùng
 def extract_final_answer(messages) -> str:
     for message in reversed(messages):
         if isinstance(message, AIMessage):

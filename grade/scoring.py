@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import time
+
 ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
@@ -249,11 +251,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Grade saved JSON output for the order-agent lab")
     parser.add_argument("--module", default="solution.agent.graph")
     parser.add_argument("--cases", default=str(ROOT_DIR / "data" / "graded_cases.json"))
-    parser.add_argument("--provider", default="google", choices=["google", "ollama"])
+    parser.add_argument("--provider", default="google", choices=["google", "ollama", "openai", "mimo", "opencode"])
     parser.add_argument("--model-name", default=None)
     parser.add_argument("--today", default="2026-06-01")
     parser.add_argument("--pass-threshold", type=float, default=80.0)
-    parser.add_argument("--judge-provider", default=None, choices=["google", "ollama"])
+
+    # Thêm delay
+    parser.add_argument("--case-delay", type=float, default=1.0)
+
+    parser.add_argument("--judge-provider", default=None, choices=["google", "ollama", "openai", "mimo", "opencode"])
     parser.add_argument("--judge-model-name", default=None)
     args = parser.parse_args()
 
@@ -275,6 +281,7 @@ def main() -> int:
             today=args.today,
         )
         result = coerce_result(raw_result, query=case["query"], provider=args.provider, model_name=args.model_name)
+        # json_output, tools trace, llm judge theo rubric
         scores.append(
             grade_result(
                 result,
@@ -283,6 +290,9 @@ def main() -> int:
                 judge_model_name=args.judge_model_name,
             )
         )
+
+        if args.case_delay > 0:
+            time.sleep(args.case_delay)
 
     summary = summarize_scores(scores)
     print(json.dumps(summary, indent=2, ensure_ascii=False))

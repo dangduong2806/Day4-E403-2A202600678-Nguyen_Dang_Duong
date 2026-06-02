@@ -7,7 +7,8 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
+load_dotenv(override=True)
 
 
 def normalize_content(raw: Any) -> str:
@@ -48,7 +49,27 @@ def build_chat_model(
             base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             temperature=temperature,
         )
-    raise ValueError("This lab supports only the `google` and `ollama` providers.")
+    if provider == "mimo":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("DEFAULT_MODEL", "mimo-v2.5-pro"),
+            temperature=temperature,
+            api_key=os.getenv("MIMO_API_KEY"),
+            base_url="https://api.xiaomimimo.com/v1",
+        )
+    
+    if provider == "opencode":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("MODEL", "deepseek-v4-flash"),
+            temperature=temperature,
+            api_key=os.getenv("API_KEY", "").strip(),
+            base_url=os.getenv("LLM_ENDPOINT", "https://opencode.ai/zen/go/v1"),
+        )
+    
+    raise ValueError("This lab supports only the `google` and `ollama` and mimo providers.")
 
 
 def extract_json_object(raw: Any) -> dict[str, Any]:
